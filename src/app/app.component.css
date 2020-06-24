@@ -1,0 +1,199 @@
+
+ /* :host ::ng-deep .ui-galleria-panel
+{
+  width: 100% !important;
+  height: 100% !important;
+} */
+
+/* :host ::ng-deep .ui-panel-images {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+:host ::ng-deep .ui-galleria-frame
+{
+    width: 100% !important;
+  height: 100% !important;
+}
+
+:host ::ng-deep h3 {
+    font-style: italic;
+  }
+
+  
+
+  .ui-galleria .ui-galleria-nav-next, .ui-galleria .ui-galleria-nav-prev {
+	cursor: pointer;
+    position: relative;
+    z-index: 910;
+    background-color: white !important;
+}
+
+.ui-galleria .ui-galleria-nav-prev {
+    left: 4px;
+}
+
+.ui-galleria .ui-galleria-nav-next {
+    right: 24px !important;
+} */
+
+
+
+:host ::ng-deep  .ui-galleria {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+    width: 100% !important;
+  height: 645px !important;
+}
+
+:host ::ng-deep .ui-galleria .ui-galleria-panel-wrapper {
+    position: relative;
+    padding: 0;
+    margin: 0;
+   
+    
+  
+}
+
+ .ui-galleria .ui-galleria-panel {
+    filter: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    list-style-type: none;
+   
+    
+   
+}
+
+:host ::ng-deep .ui-galleria .ui-galleria-filmstrip-wrapper {
+    overflow: hidden;
+    margin: .25em auto;
+    position: relative;
+  display: none;
+}
+
+:host ::ng-deep  .ui-galleria .ui-galleria-filmstrip {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    width: 340px;
+    z-index: 900;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+:host ::ng-deep .ui-galleria .ui-galleria-frame {
+    float:left;
+    margin-right: 5px;
+    opacity: 0.3;
+    cursor: pointer;
+    margin-top: 10px !important;
+    margin-left: 290px !important;
+    background-color: red !important;
+   
+   
+}
+
+:host ::ng-deep   .ui-galleria .ui-galleria-frame-active {
+    opacity: 0.3;
+}
+
+:host ::ng-deep .ui-galleria .ui-galleria-frame-content {
+    overflow: hidden;
+   
+}
+
+:host ::ng-deep .ui-galleria .ui-galleria-nav-next, .ui-galleria .ui-galleria-nav-prev {
+	cursor: pointer;
+    position: relative !important;
+    width : 180px !important;
+    height: 180px !important;
+    color:  saddlebrown !important;
+  background-color:  saddlebrown !important ;
+    border-radius: 50% !important;
+text-align: center !important;
+    margin-bottom: 650px  !important;
+    margin-top: 50px  !important;
+   padding-left: 8px !important;
+   padding-top: 25px !important;
+    /* z-index: 910;
+    width : 80px !important;
+   color: red !important;
+
+    height: 200px !important; */
+
+}
+
+:host ::ng-deep .ui-galleria .ui-galleria-nav-prev {
+    left: 4px;
+    margin-bottom: 750px  !important;
+    margin-left: 1240px !important;
+    width : 80px !important;
+    height: 200px !important;
+    color: red !important;
+}
+
+:host ::ng-deep .ui-galleria .ui-galleria-nav-next {
+    right: 4px;
+    margin-bottom: 950px  !important;
+    margin-top: 50px  !important;
+    
+    margin-left: 1240px !important;
+    width : 80px !important;
+    height: 80px !important;
+    color: white !important;
+    border-radius: 50% !important;
+
+}
+
+:host ::ng-deep  .pi .pi-fw .pi-chevron-right  
+{
+     width : 80px !important;
+    height: 80px !important;
+    background-color:  blanchedalmond !important ; 
+
+}
+:host ::ng-deep .ui-galleria .ui-galleria-caption {
+    position: absolute;
+    margin-left: 550px !important;
+    margin-bottom: 400px !important;
+ 
+    text-align: center !important;
+    left:1px;
+
+    font-size: 26px !important;
+    background-color: transparent !important;
+    /* rgba(0,0,0,0.5); */
+   
+    color: #ededed;
+    padding: 0.2em 1em;
+}
+
+:host ::ng-deep .ui-galleria .ui-galleria-caption h4 {
+    color: #ededed;
+}
+
+:host ::ng-deep   .ui-galleria .ui-galleria-panel-content {
+    padding: 1em 1.4em;
+}
+
+
+/* :host ::ng-deep  .pi .pi-fw {
+    margin-top: 45px !important;
+    text-align: center;
+    font-size: 2em !important;
+} 
+ */
+
+ :host >>>  .pi   .pi-chevron-right 
+{
+ 
+     
+     font-size: 25px !important;
+
+}
