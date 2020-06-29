@@ -24,12 +24,16 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { DropdownModule } from "primeng/dropdown";
+import { TeamComponent } from "./team/team/team.component";
+import { CalendarModule } from "primeng/calendar";
+import { TableModule } from "primeng/table";
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     defaultComponent,
     FooterComponent,
+    TeamComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   // }),
@@ -42,6 +46,8 @@ import { DropdownModule } from "primeng/dropdown";
     PanelModule,
     MenubarModule,
     DropdownModule,
+    TableModule,
+    CalendarModule,
     GalleriaModule,
     defualtModule,
     MatIconModule,

@@ -1,8 +1,8 @@
-import { content } from "./content";
+import { Contents } from "./airport";
 
 export class ApiResponse {
   //field
-  content: content[];
+  content: Contents[];
 
   //constructor
   // constructor(content:string) {

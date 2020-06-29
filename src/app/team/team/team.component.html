@@ -1,256 +1,250 @@
-<div class="headeradviser"></div>
+<!-- <div class="headeradviser"></div> -->
 
-<i class="pi pi-ellipsis-h headeradviser12"></i>
-<div class="headeradviser1">
-  this is dropdown data
+<!-- <i class="pi pi-ellipsis-h headeradviser12"></i>
 
-  <p-dropdown [options]="content" [(ngModel)]="content1"></p-dropdown>
-</div>
+<div class="headeradviser1"></div> -->
 
 <!-- new div -->
 
 <div class="p-grid ui-helper-clearfix">
-  <div class="p-col-fixed align" style="width: 590px;">
-    <div class="left">
-      <img
-        src="assets/Shafiq-UR-Rehman.jpg"
-        style="width: 270px; height: 270px;"
-      />
-    </div>
+  <div class="p-col-fixed align" style="width: 590px; margin-top: 45px;">
+    <p-dialog
+      header="Car Details"
+      [(visible)]="displayDialog"
+      [focusOnShow]="false"
+      [responsive]="true"
+      showEffect="fade"
+      [modal]="true"
+      [style]="{ width: '300px' }"
+    >
+      <div class="p-grid ui-fluid">
+        <div class="p-col-3">
+          <label for="vin" rea>Air Line</label>
+        </div>
+        <div class="p-col-8">
+          <p-dropdown
+            [options]="airLines"
+            [(ngModel)]="airLine"
+            (onChange)="onChangeAirLine()"
+          ></p-dropdown>
+        </div>
 
-    <p>Shafiq UR Rehman</p>
-    <p>FCPA, FCCEA, MBA</p>
-    <p>Advisor</p>
-    <p>
-      He is fellow member of Institute of Certified Public Accountant of United
-      Kingdom and Pakistan and Fellow member of Certified Corporate Executive
-      Accountant (USA), Associate of Financial Accountant (UK), Certificate in
-      IFRS(ACCA), IPA (Australia), Member of IFA, Certificate in USA Federal
-      Taxation(Devry University) and holds Master Degree in Business and
-      Administration. He has over 20 years diversified experience in
-      UAE/Pakistan in financial accounting & financialmanagement, internal &
-      external Auditing. He has worked as Financial Advisor of Hamdan Bin
-      Mohammad Heritage Centre in Dubai-UAE
-    </p>
+        <div class="p-col-3">
+          <label for="year"> From AirPort</label>
+        </div>
+        <div class="p-col-8">
+          <p-dropdown
+            [options]="airPortsFrom"
+            [(ngModel)]="airPortsFromValue"
+            (onChange)="onChangeAirPrtFrom()"
+          ></p-dropdown>
+        </div>
+        <div class="p-col-3">
+          <label for="brand"> To AirPort</label>
+        </div>
+        <div class="p-col-8">
+          <p-dropdown
+            [options]="airPortsTo"
+            [(ngModel)]="airPortsToValue"
+            (onChange)="onChangeAirPrtTo()"
+          ></p-dropdown>
+        </div>
+        <div class="p-col-3">
+          Please Select DateTime
+        </div>
+        <div class="p-col-8">
+          <p-calendar
+            [(ngModel)]="departureDate"
+            showTime="showTime"
+            hourFormat="24"
+            dataType="string"
+            dateFormat="yy-mm-dd"
+          ></p-calendar>
+        </div>
+        <div class="p-col-3">
+          Seats
+        </div>
+        <div class="p-col-8">
+          <input type="text" size="50" pInputText [(ngModel)]="seats" />
+        </div>
+      </div>
+      <p-footer>
+        <div class="p-col-12">
+          <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button
+              type="button"
+              pButton
+              icon="pi pi-check"
+              (click)="postDataFlights()"
+              label="Save Flight"
+            ></button>
+          </div>
+        </div>
+      </p-footer>
+    </p-dialog>
   </div>
 
+  <!-- 
+    left side -->
   <div class="vl"></div>
-  <div class="p-col-fixed align" style="width: 590px;">
-    <div class="right">
-      <img
-        src="assets/Shafiq-UR-Rehman.jpg"
-        style="width: 270px; height: 270px;"
-      />
-    </div>
+  <div class="p-col-fixed align" style="width: 590px; margin-top: 45px;">
+    <p-table
+      [columns]="cols"
+      [value]="contentflights"
+      selectionMode="single"
+      [(selection)]="selectedflight"
+      (onRowSelect)="onRowSelect($event)"
+      [paginator]="true"
+      [rows]="15"
+    >
+      <ng-template pTemplate="caption">
+        List of Cars
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td *ngFor="let col of columns">
+            {{ rowData[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <!-- 
+       login dialogeu -->
+    <p-dialog
+      header="Car Details"
+      [(visible)]="ROLE_USER"
+      [focusOnShow]="false"
+      [responsive]="true"
+      showEffect="fade"
+      [modal]="true"
+      [style]="{ width: '300px' }"
+    >
+      <div class="p-grid ui-fluid" *ngIf="ROLE_USER">
+        <div class="p-col-3">
+          <label for="vin" rea> User Name </label>
+        </div>
+        <div class="p-col-8">
+          <input
+            size="50"
+            readonly
+            pInputText
+            id="vin"
+            [(ngModel)]="car.airlineName"
+            autofocus
+          />
+        </div>
+        <div class="p-col-3">
+          <label for="year">Password</label>
+        </div>
+        <div class="p-col-8">
+          <input
+            readonly
+            size="50"
+            pInputText
+            id="year"
+            [(ngModel)]="car.airportName"
+          />
+        </div>
+      </div>
+      <p-footer *ngIf="ROLE_USER">
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button
+            type="button"
+            pButton
+            icon="pi pi-check"
+            (click)="postDataBooking()"
+            label="Login "
+          ></button>
+        </div>
+      </p-footer>
+    </p-dialog>
 
-    <p>Shafiq UR Rehman</p>
-    <p>FCPA, FCCEA, MBA</p>
-    <p>Advisor</p>
-    <p>
-      He is fellow member of Institute of Certified Public Accountant of United
-      Kingdom and Pakistan and Fellow member of Certified Corporate Executive
-      Accountant (USA), Associate of Financial Accountant (UK), Certificate in
-      IFRS(ACCA), IPA (Australia), Member of IFA, Certificate in USA Federal
-      Taxation(Devry University) and holds Master Degree in Business and
-      Administration. He has over 20 years diversified experience in
-      UAE/Pakistan in financial accounting & financialmanagement, internal &
-      external Auditing. He has worked as Financial Advisor of Hamdan Bin
-      Mohammad Heritage Centre in Dubai-UAE
-    </p>
+    <p-dialog
+      header="Car Details"
+      [(visible)]="displayDialog"
+      [focusOnShow]="false"
+      [responsive]="true"
+      showEffect="fade"
+      [modal]="true"
+      [style]="{ width: '300px' }"
+    >
+      <div class="p-grid ui-fluid" *ngIf="displayDialog">
+        <div class="p-col-3">
+          <label for="vin" rea>Air Line</label>
+        </div>
+        <div class="p-col-8">
+          <input
+            size="50"
+            readonly
+            pInputText
+            id="vin"
+            [(ngModel)]="car.airlineName"
+            autofocus
+          />
+        </div>
+        <div class="p-col-3">
+          <label for="year">From Air Port</label>
+        </div>
+        <div class="p-col-8">
+          <input
+            readonly
+            size="50"
+            pInputText
+            id="year"
+            [(ngModel)]="car.airportName"
+          />
+        </div>
+        <div class="p-col-3">
+          <label for="brand">To Airport</label>
+        </div>
+        <div class="p-col-8">
+          <input
+            readonly
+            pInputText
+            size="50"
+            id="brand"
+            [(ngModel)]="car.airportNameTo"
+          />
+        </div>
+        <div class="p-col-3">
+          <label for="brand">Departure Date</label>
+        </div>
+        <div class="p-col-8">
+          <input
+            readonly
+            pInputText
+            id="brand"
+            size="50"
+            [(ngModel)]="car.date"
+          />
+        </div>
+        <div class="p-col-3">
+          Seats
+        </div>
+        <div class="p-col-8">
+          <input type="text" size="50" pInputText [(ngModel)]="seates" />
+        </div>
+      </div>
+      <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button
+            type="button"
+            pButton
+            icon="pi pi-check"
+            (click)="postDataBooking()"
+            label="Book Flight"
+          ></button>
+        </div>
+      </p-footer>
+    </p-dialog>
   </div>
+  <div class="hl"></div>
 </div>
-<div class="hl"></div>
-<!--   end   div /// -->
-<!-- new div -->
-
-<div class="p-grid ui-helper-clearfix">
-  <div class="p-col-fixed align" style="width: 590px;">
-    <div class="left">
-      <img
-        src="assets/Shafiq-UR-Rehman.jpg"
-        style="width: 270px; height: 270px;"
-      />
-    </div>
-
-    <p>Shafiq UR Rehman</p>
-    <p>FCPA, FCCEA, MBA</p>
-    <p>Advisor</p>
-    <p>
-      He is fellow member of Institute of Certified Public Accountant of United
-      Kingdom and Pakistan and Fellow member of Certified Corporate Executive
-      Accountant (USA), Associate of Financial Accountant (UK), Certificate in
-      IFRS(ACCA), IPA (Australia), Member of IFA, Certificate in USA Federal
-      Taxation(Devry University) and holds Master Degree in Business and
-      Administration. He has over 20 years diversified experience in
-      UAE/Pakistan in financial accounting & financialmanagement, internal &
-      external Auditing. He has worked as Financial Advisor of Hamdan Bin
-      Mohammad Heritage Centre in Dubai-UAE
-    </p>
-  </div>
-
-  <div class="vl"></div>
-  <div class="p-col-fixed align" style="width: 590px;">
-    <div class="right">
-      <img
-        src="assets/Shafiq-UR-Rehman.jpg"
-        style="width: 270px; height: 270px;"
-      />
-    </div>
-
-    <p>Shafiq UR Rehman</p>
-    <p>FCPA, FCCEA, MBA</p>
-    <p>Advisor</p>
-    <p>
-      He is fellow member of Institute of Certified Public Accountant of United
-      Kingdom and Pakistan and Fellow member of Certified Corporate Executive
-      Accountant (USA), Associate of Financial Accountant (UK), Certificate in
-      IFRS(ACCA), IPA (Australia), Member of IFA, Certificate in USA Federal
-      Taxation(Devry University) and holds Master Degree in Business and
-      Administration. He has over 20 years diversified experience in
-      UAE/Pakistan in financial accounting & financialmanagement, internal &
-      external Auditing. He has worked as Financial Advisor of Hamdan Bin
-      Mohammad Heritage Centre in Dubai-UAE
-    </p>
-  </div>
-</div>
-<div class="hl"></div>
-<!--   end   div /// -->
-<!-- new div -->
-
-<div class="p-grid ui-helper-clearfix">
-  <div class="p-col-fixed align" style="width: 590px;">
-    <div class="left">
-      <img
-        src="assets/Shafiq-UR-Rehman.jpg"
-        style="width: 270px; height: 270px;"
-      />
-    </div>
-
-    <p>Shafiq UR Rehman</p>
-    <p>FCPA, FCCEA, MBA</p>
-    <p>Advisor</p>
-    <p>
-      He is fellow member of Institute of Certified Public Accountant of United
-      Kingdom and Pakistan and Fellow member of Certified Corporate Executive
-      Accountant (USA), Associate of Financial Accountant (UK), Certificate in
-      IFRS(ACCA), IPA (Australia), Member of IFA, Certificate in USA Federal
-      Taxation(Devry University) and holds Master Degree in Business and
-      Administration. He has over 20 years diversified experience in
-      UAE/Pakistan in financial accounting & financialmanagement, internal &
-      external Auditing. He has worked as Financial Advisor of Hamdan Bin
-      Mohammad Heritage Centre in Dubai-UAE
-    </p>
-  </div>
-
-  <div class="vl"></div>
-  <div class="p-col-fixed align" style="width: 590px;">
-    <div class="right">
-      <img
-        src="assets/Shafiq-UR-Rehman.jpg"
-        style="width: 270px; height: 270px;"
-      />
-    </div>
-
-    <p>Shafiq UR Rehman</p>
-    <p>FCPA, FCCEA, MBA</p>
-    <p>Advisor</p>
-    <p>
-      He is fellow member of Institute of Certified Public Accountant of United
-      Kingdom and Pakistan and Fellow member of Certified Corporate Executive
-      Accountant (USA), Associate of Financial Accountant (UK), Certificate in
-      IFRS(ACCA), IPA (Australia), Member of IFA, Certificate in USA Federal
-      Taxation(Devry University) and holds Master Degree in Business and
-      Administration. He has over 20 years diversified experience in
-      UAE/Pakistan in financial accounting & financialmanagement, internal &
-      external Auditing. He has worked as Financial Advisor of Hamdan Bin
-      Mohammad Heritage Centre in Dubai-UAE
-    </p>
-  </div>
-</div>
-<div class="hl"></div>
-<!--   end   div /// -->
-<!-- new div -->
-
-<div class="p-grid ui-helper-clearfix">
-  <div class="p-col-fixed align" style="width: 590px;">
-    <div class="left">
-      <img
-        src="assets/Shafiq-UR-Rehman.jpg"
-        style="width: 270px; height: 270px;"
-      />
-    </div>
-
-    <p>Shafiq UR Rehman</p>
-    <p>FCPA, FCCEA, MBA</p>
-    <p>Advisor</p>
-    <p>
-      He is fellow member of Institute of Certified Public Accountant of United
-      Kingdom and Pakistan and Fellow member of Certified Corporate Executive
-      Accountant (USA), Associate of Financial Accountant (UK), Certificate in
-      IFRS(ACCA), IPA (Australia), Member of IFA, Certificate in USA Federal
-      Taxation(Devry University) and holds Master Degree in Business and
-      Administration. He has over 20 years diversified experience in
-      UAE/Pakistan in financial accounting & financialmanagement, internal &
-      external Auditing. He has worked as Financial Advisor of Hamdan Bin
-      Mohammad Heritage Centre in Dubai-UAE
-    </p>
-  </div>
-
-  <div class="vl"></div>
-  <div class="p-col-fixed align" style="width: 590px;">
-    <div class="right">
-      <img
-        src="assets/Shafiq-UR-Rehman.jpg"
-        style="width: 270px; height: 270px;"
-      />
-    </div>
-
-    <p>Shafiq UR Rehman</p>
-    <p>FCPA, FCCEA, MBA</p>
-    <p>Advisor</p>
-    <p>
-      He is fellow member of Institute of Certified Public Accountant of United
-      Kingdom and Pakistan and Fellow member of Certified Corporate Executive
-      Accountant (USA), Associate of Financial Accountant (UK), Certificate in
-      IFRS(ACCA), IPA (Australia), Member of IFA, Certificate in USA Federal
-      Taxation(Devry University) and holds Master Degree in Business and
-      Administration. He has over 20 years diversified experience in
-      UAE/Pakistan in financial accounting & financialmanagement, internal &
-      external Auditing. He has worked as Financial Advisor of Hamdan Bin
-      Mohammad Heritage Centre in Dubai-UAE
-    </p>
-  </div>
-</div>
-<div class="hl"></div>
-<!--   end   div /// -->
-<!-- new div -->
-
-<div class="p-grid ui-helper-clearfix">
-  <div class="p-col-fixed align" style="width: 590px;">
-    <div class="left">
-      <img
-        src="assets/Shafiq-UR-Rehman.jpg"
-        style="width: 270px; height: 270px;"
-      />
-    </div>
-
-    <span>Shafiq UR Rehman</span><br />
-    <span>FCPA, FCCEA, MBA</span>
-    <p>Advisor</p>
-    <p>
-      He is fellow member of Institute of Certified Public Accountant of United
-      Kingdom and Pakistan and Fellow member of Certified Corporate Executive
-      Accountant (USA), Associate of Financial Accountant (UK), Certificate in
-      IFRS(ACCA), IPA (Australia), Member of IFA, Certificate in USA Federal
-      Taxation(Devry University) and holds Master Degree in Business and
-      Administration. He has over 20 years diversified experience in
-      UAE/Pakistan in financial accounting & financialmanagement, internal &
-      external Auditing. He has worked as Financial Advisor of Hamdan Bin
-      Mohammad Heritage Centre in Dubai-UAE
-    </p>
-  </div>
-
-  <div class="vl"></div>
-</div>
-<div class="hl"></div>
-<!--   end   div /// -->

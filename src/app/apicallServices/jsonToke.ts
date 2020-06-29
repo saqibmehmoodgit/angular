@@ -1,16 +1,23 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { ApiResponse } from "./response";
-const baseUrl = "http://localhost:8080/";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+
+import { airLineResponse } from "./airLineResponse";
+import { TokenResponse } from "./tokenResponse";
+const baseUrl = "http://localhost:8080/api/auth/signin";
 
 @Injectable({
   providedIn: "root",
 })
-export class ApiCallService {
+export class jsonTokenService {
   constructor(private http: HttpClient) {}
 
-  getAll() {
-    return this.http.get<ApiResponse>(baseUrl + "airPorts");
+  getJsonToken() {
+    var data = {
+      userName: "saqib",
+      userPassword: "saqib123",
+    };
+
+    return this.http.post<TokenResponse>(baseUrl, data);
   }
 
   get(id) {
