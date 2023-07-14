@@ -32,7 +32,7 @@
     "chart.js": "^2.9.3",
     "font-awesome": "^4.7.0",
     "fullcalendar": "^4.0.0-alpha.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "popper.js": "^1.16.1",
     "primeflex": "^1.0.0",
     "primeicons": "^2.0.0",
